@@ -55,7 +55,7 @@ def scrape_jobs():
     target_url = "https://brown-forman.jobs/usacanada/new-jobs/"
 
     #time to go scrape the page, gotta make the chrome driver
-    driver = webdriver.Chrome('./Chrome/81/chromedriver')
+    driver = webdriver.Chrome('./Chrome/83/chromedriver')
     driver.get(target_url)
     time.sleep(3)
 
