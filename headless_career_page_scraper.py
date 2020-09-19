@@ -58,7 +58,7 @@ def scrape_jobs():
     chrome_options = Options()
     chrome_options.add_argument('--headless')
     #time to go scrape the page, gotta make the chrome driver
-    driver = webdriver.Chrome('./Chrome/83/chromedriver', options=chrome_options)
+    driver = webdriver.Chrome('./Chrome/85/chromedriver', options=chrome_options)
     driver.get(target_url)
     time.sleep(3)
 
@@ -110,11 +110,18 @@ def main():
     jobs_and_links = scrape_jobs()
     #i didnt want to have to do it like this but i couldnt get the += to work inside the list comprehension i made
     body_text = ""
-    for job_and_link in jobs_and_links:
-        body_text += "{} - {}\n".format(job_and_link[0], job_and_link[1])
+    messages = []
 
+    for job_and_link in jobs_and_links:
+        if(len(body_text) > 1400):
+            messages.append(body_text)
+            body_text = ""
+        body_text += "{} - {}\n".format(job_and_link[0], job_and_link[1])
+    messages.append(body_text)
+
+    [send_text_msg(str(data_list['to_number']), str(data_list['from_number']), str(body_text), client) for body_text in messages]
     #this is a call to the helper function when we are ready to send the text message
-    message = send_text_msg(str(data_list['to_number']), str(data_list['from_number']), str(body_text), client)
+    #message = send_text_msg(str(data_list['to_number']), str(data_list['from_number']), str(body_text), client)
 
     return
 
