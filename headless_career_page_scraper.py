@@ -58,7 +58,7 @@ def scrape_jobs():
     chrome_options = Options()
     chrome_options.add_argument('--headless')
     #time to go scrape the page, gotta make the chrome driver
-    driver = webdriver.Chrome('./Chrome/85/chromedriver', options=chrome_options)
+    driver = webdriver.Chrome('./Chrome/83/chromedriver', options=chrome_options)
     driver.get(target_url)
     time.sleep(3)
 
